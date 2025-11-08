@@ -30,6 +30,7 @@ replay_pid*
 **/WorkstationSettings
 **/README.md
 **/Accounts.Dynamic
+**/Settings.Dynamic
 **/Settings.Startup
 
 #Exclude these folders for later set-up as Sub Modules
