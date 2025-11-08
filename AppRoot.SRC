@@ -46,6 +46,8 @@
   ]
 
   [ (PAGES)         {===== Modules that are graphic pages and dialogs =====}
+    Devmaster_Page Module "Pages\Devmaster_Page.SRC";
+    Overview Module "Pages\Overview.SRC";
   ]
 
   [ (SERVICES)      {===== Modules that are services that are started =====}

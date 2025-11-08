@@ -1,0 +1,17 @@
+[
+  Title = "W/zkKEqgK";
+]
+
+Main [
+  Return(Self);
+  GUIText(263, 247, 423, 227,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          0, 4,
+          "%s",
+          \GetPhrase("/RqTzQ027"));
+]
