@@ -22,3 +22,16 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+#VTSCADA
+**/.sync
+**/Data
+**/PlatformInfo
+**/WorkstationSettings
+**/README.md
+**/Accounts.Dynamic
+**/Settings.Startup
+
+#Exclude these folders for later set-up as Sub Modules
+**/Tags
+**/ChildTags
