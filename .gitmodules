@@ -1,0 +1,3 @@
+[submodule "Tags"]
+	path = Tags
+	url = ../TESTSCADA_Tags
