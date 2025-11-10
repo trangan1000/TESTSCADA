@@ -47,6 +47,7 @@
 
   [ (PAGES)         {===== Modules that are graphic pages and dialogs =====}
     Hoangs_Page Module "Pages\Hoangs_Page.SRC";
+    Devmaster_Page Module "Pages\Devmaster_Page.SRC";
     Overview Module "Pages\Overview.SRC";
   ]
 

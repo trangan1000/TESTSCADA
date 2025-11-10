@@ -1,0 +1,49 @@
+[
+  Title = "W/zkKEqgK";
+]
+
+Main [
+  Return(Self);
+  GUIText(263, 247, 423, 227,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          0, 4,
+          "%s",
+          \GetPhrase("/RqTzQ027"));
+  GUITransform(245, 288, 345, 262,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               PickValid(Scope(\VTSDB, "bnLo9(e6.k\tptaf-71!;\uLd+;nhdbz", TRUE)\Number, Scope(\VTSDB, ":IO", TRUE)\Number)("<FF000000>", 0, 1, 1, Invalid, Invalid, -1, 3, 1, 0, 0, 0, 0, 1, 0, -1));
+  GUIText(118, 282, 278, 262,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          0, 4,
+          "%s",
+          \GetPhrase("TZRMLWXMm"));
+  GUIText(118, 309, 278, 289,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          0, 4,
+          "%s",
+          \GetPhrase("T+rJJCx+9"));
+  GUITransform(245, 312, 345, 286,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               PickValid(Scope(\VTSDB, "bnLo9(e6.k\tptaf-71!;\a44.re+{cm", TRUE)\Number, Scope(\VTSDB, ":IO", TRUE)\Number)("<FF000000>", 0, 1, 1, Invalid, Invalid, -1, 3, 1, 0, 0, 0, 0, 1, 0, -1, -1));
+]
