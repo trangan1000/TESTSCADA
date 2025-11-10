@@ -46,6 +46,8 @@
   ]
 
   [ (PAGES)         {===== Modules that are graphic pages and dialogs =====}
+    TestBranch1 Module "Pages\TestBranch1.SRC";
+    Feature_HT02 Module "Pages\Feature_HT02.SRC";
     New_Feature_JT_01 Module "Pages\New_Feature_JT_01.SRC";
     New_Feature_01 Module "Pages\New_Feature_01.SRC";
     Hoangs_Page Module "Pages\Hoangs_Page.SRC";

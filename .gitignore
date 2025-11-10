@@ -29,7 +29,8 @@ replay_pid*
 **/PlatformInfo
 **/WorkstationSettings
 README.md
-*.Dynamic
+Accounts.Dynamic
+Settings.Dynamic
 Settings.Startup
 
 #Exclude these folders for later set-up as Sub Modules
