@@ -1,2 +1,0 @@
-# TESTSCADA
-test scada
