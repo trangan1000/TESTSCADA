@@ -1,0 +1,17 @@
+[
+  Title = "IXxLBCDCo";
+]
+
+Main [
+  Return(Self);
+  GUIText(198, 253, 694, 191,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Font(Scope(\VTSDB, "LabelFont", TRUE)\FontName, Scope(\VTSDB, "LabelFont", TRUE)\CharacterSet, 28, Scope(\VTSDB, "LabelFont", TRUE)\Rotation, Scope(\VTSDB, "LabelFont", TRUE)\Weight, Scope(\VTSDB, "LabelFont", TRUE)\Flags, Scope(\VTSDB, "LabelFont", TRUE)\Fixed),
+          0, 4,
+          "%s",
+          \GetPhrase("Z6diCBoxX"));
+]
