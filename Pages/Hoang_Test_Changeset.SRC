@@ -1,0 +1,23 @@
+[
+  Title = "ZdOpNTHUS";
+]
+
+Main [
+  Return(Self);
+  GUIText(114, 160, 274, 140,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          0, 4,
+          "%s",
+          \GetPhrase("CcqZ1xMX+"));
+  GUITransform(86, 423, 285, 224,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\VTSDB, ":IO", TRUE)\HP_Radial_Gauge(Invalid, 225, 135, Invalid, -7, 1, 5, 4, 10, 5, "\HPOutline", "\HPOutline", "\HPBackground", "\HPAlmOff", "\HPExpectedRange", "\HPRecentData", 0, 0, 0, 0, 0, 1, 1, 1, 0));
+]

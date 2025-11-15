@@ -46,7 +46,9 @@
   ]
 
   [ (PAGES)         {===== Modules that are graphic pages and dialogs =====}
-    Hoang_Test_Changeset Module "Pages\Hoang_Test_Changeset.SRC";
+    TestBranch1 Module "Pages\TestBranch1.SRC";
+    Feature_HT02 Module "Pages\Feature_HT02.SRC";
+    MAIN_SCADA Module "Pages\MAIN_SCADA.SRC";
     Overview Module "Pages\Overview.SRC";
   ]
 
