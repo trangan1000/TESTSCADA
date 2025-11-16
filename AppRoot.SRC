@@ -46,8 +46,6 @@
   ]
 
   [ (PAGES)         {===== Modules that are graphic pages and dialogs =====}
-    Hoangs_MAIN_branch Module "Pages\Hoangs_MAIN_branch.SRC";
-    Hoangs_DEV_1 Module "Pages\Hoangs_DEV_1.SRC";
     Hoang_Test_Changeset Module "Pages\Hoang_Test_Changeset.SRC";
     Overview Module "Pages\Overview.SRC";
   ]
