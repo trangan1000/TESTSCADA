@@ -1,0 +1,13 @@
+[
+  Title = "GlwR3NahF";
+]
+
+Main [
+  Return(Self);
+  GUITransform(220, 377, 394, 203,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\VTSDB, ":AnalogStatus", TRUE)\Meter6(4, 5, 1, 0, 100, 0, 0, 0));
+]
