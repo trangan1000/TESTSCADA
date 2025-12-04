@@ -1,0 +1,19 @@
+[
+  Title = "89TuM9xQL";
+]
+
+Main [
+  Return(Self);
+  GUITransform(204, 373, 378, 199,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\VTSDB, ":AnalogStatus", TRUE)\Meter14(5, 4, 1, 0, 100, 0, 0, 0));
+  GUITransform(475, 362, 649, 188,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\VTSDB, ":AnalogStatus", TRUE)\Meter19(5, 4, 1, Invalid, Invalid, 1, "<FF000000>", "<FF000000>", "<FFFFD276>", 0, 0, 0));
+]
