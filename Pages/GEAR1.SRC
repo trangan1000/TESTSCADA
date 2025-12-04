@@ -1,0 +1,13 @@
+[
+  Title = "fMvLzL9aJ";
+]
+
+Main [
+  Return(Self);
+  GUITransform(307, 411, 481, 237,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\VTSDB, ":AnalogStatus", TRUE)\Meter19(5, 4, 1, Invalid, Invalid, 1, "<FF000000>", "<FF000000>", "<FFFFD276>", 0, 0, 0));
+]
