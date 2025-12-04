@@ -10,4 +10,10 @@ Main [
                1, 0          { Visibility, Reserved },
                0, 0, 0       { Selectability        },
                Scope(\VTSDB, ":AnalogStatus", TRUE)\Meter19(5, 4, 1, Invalid, Invalid, 1, "<FF000000>", "<FF000000>", "<FFFFD276>", 0, 0, 0));
+  GUITransform(37, 146, 137, 120,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               PickValid(Scope(\VTSDB, "1@)!5-20)}\fkmp~bzt.q\vL)6.os8!z\m8}(3dk17i", TRUE)\Number, Scope(\VTSDB, ":IO", TRUE)\Number)("<FF000000>", 0, 1, 1, Invalid, Invalid, -1, 3, 1, 0, 0, 0, 0, 1, 0, -1, -1));
 ]
