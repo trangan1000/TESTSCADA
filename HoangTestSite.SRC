@@ -1,0 +1,109 @@
+{================================ TagType ==================================}
+{ This tag type was generated programmatically. If you edit this SRC file,  }
+{ you should remove the #CAN_EDIT_TYPE constant so that attempts to         }
+{ update the type programmatically will not overwrite your SRC changes.     }
+{===========================================================================}
+(
+  Name         <:TagField("SQL_VARCHAR(255)"):> { Name of the tag         };
+  Area         <:TagField("SQL_VARCHAR(255)"):> { Area of the tag         };
+  Description  <:TagField("SQL_PHRASEID"):>     { Description of the tag  };
+  HelpKey      <:TagField("SQL_VARCHAR(255)"):> { HelpKey of the tag      };
+)
+
+[
+  Constant DrawLabel;
+  Constant NumTagFiles = 16;
+  Constant #IS_CONTAINER  = True { Always show these tags in tag browser tree       };
+  Constant #CAN_EDIT_TYPE = True { This tag can be edited by tag type editing tools };
+
+   { The next block of constants defines the offset into the parameter list,
+     starting from 0, for each of the parameters }
+  Constant #Name        = 0;
+  Constant #Area        = 1;
+  Constant #Description = 2;
+  Constant #HelpKey     = 3;
+  Constant #HelpKey_Comment = "HelpSearchKeyLabel";
+
+  [ (GROUPS)
+    Shared Container          { We are a container tag                      };
+  ]
+
+   { List of draw methods for this tag type }
+  [ (GRAPHICS)
+    Shared AddLockButton;
+    Shared ControlTokenBox;
+    Shared RequestTokenButton;
+    Shared DrawAlarmList;
+    Shared AlarmPriorityIndicatorBox;
+    Shared AlarmPriorityIndicator;
+    Shared DrawHDV;
+    Shared AlarmList = "LSAlarmList";
+    Shared SiteDetails = "LSSiteDetails";
+    Shared GenericSiteDraw;
+    Shared StationDraw = "LSStationDraw";
+    Shared TagListDM;
+  ]
+
+  Root                        { This variable must be defined and must contain
+                                the instance of this module as its value    };
+  CustomMapIconName           { The name of the custom icon to use on a map };
+  LatitudeValue               { Evaluated location of this site             };
+  LongitudeValue              { Evaluated location of this site             };
+  ConnectorColorValue         { Evaluated colour of this connector          };
+
+  Refresh Module              { Subroutine which will be called by the
+                                tag parameter configuration tools to
+                                notify this tag when on-line changes to the
+                                parameters are made.                        };
+
+  Value                       { Return value for the tag - Invalid          };
+]
+
+Init [
+  If 1 TagMain;
+  [
+    CriticalSection(
+       { Set up initial values }
+      Root = Self;
+      Refresh();
+    );
+  ]
+]
+
+TagMain [
+   { Set the Latitude and Longitude }
+  LatitudeValue       = (Valid(Scope(Root, "Latitude",       TRUE)) ? \ExpressionManager : Invalid)\ToValue(Scope(Root, "Latitude",       TRUE));
+  LongitudeValue      = (Valid(Scope(Root, "Longitude",      TRUE)) ? \ExpressionManager : Invalid)\ToValue(Scope(Root, "Longitude",      TRUE));
+  ConnectorColorValue = (Valid(Scope(Root, "ConnectorColor", TRUE)) ? \ExpressionManager : Invalid)\ToValue(Scope(Root, "ConnectorColor", TRUE));
+]
+
+<
+{================================ Refresh ==================================}
+{ This subroutine will be called whenever the parameters for the module     }
+{ are changed and allow the tag to perform any necessary actions to         }
+{ undo any previous effects necessary such as changing drivers.  It is      }
+{ passed an array of the previous parameter values.  The current parameter  }
+{ values for the tag have already been changed by the time this is called.  }
+{===========================================================================}
+Refresh
+(
+  Parms                       { This is a pointer to an array which contains
+                                the values of all of the parameters for the
+                                tag prior to their change.                };
+)
+
+Refresh [
+  If 1;
+  [
+    \ExpressionManager\SafeRefresh(&Scope(Root, "Latitude",       TRUE), Parms\Latitude);
+    \ExpressionManager\SafeRefresh(&Scope(Root, "Longitude",      TRUE), Parms\Longitude);
+    \ExpressionManager\SafeRefresh(&Scope(Root, "ConnectorColor", TRUE), Parms\ConnectorColor);
+
+    \SetMapIcon(Root);
+
+    Return(Invalid);
+  ]
+]
+
+{ End of Refresh }
+>
