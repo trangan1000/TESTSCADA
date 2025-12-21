@@ -1,0 +1,19 @@
+[
+  Title = "8bam4hPeG";
+]
+
+Main [
+  Return(Self);
+  GUITransform(235, 442, 409, 268,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\VTSDB, ":AnalogStatus", TRUE)\Meter6(4, 5, 1, 0, 100, 0, 0, 0));
+  GUITransform(589, 353, 763, 179,
+               1, 1, 1, 1, 1 { Scaling              },
+               0, 0          { Movement             },
+               1, 0          { Visibility, Reserved },
+               0, 0, 0       { Selectability        },
+               Scope(\VTSDB, ":AnalogStatus", TRUE)\Meter19(5, 4, 1, Invalid, Invalid, 1, "<FF000000>", "<FF000000>", "<FFFFD276>", 0, 0, 0));
+]
