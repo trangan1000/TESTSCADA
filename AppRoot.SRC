@@ -47,6 +47,7 @@
   ]
 
   [ (PAGES)         {===== Modules that are graphic pages and dialogs =====}
+    Page_3 Module "Pages\Page_3.SRC";
     Page_2 Module "Pages\Page_2.SRC";
     RIFE1 Module "Pages\RIFE1.SRC";
     GEAR1 Module "Pages\GEAR1.SRC";
