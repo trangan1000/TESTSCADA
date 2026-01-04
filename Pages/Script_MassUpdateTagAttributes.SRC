@@ -1,0 +1,178 @@
+[
+  Title = "QCSI_Scotto";
+  
+  DriverArray;
+  Index;
+  TagParms;
+  Success;
+    
+  TimeoutValue=6;
+  RetryValue=2;
+  PageX;
+  PageY;
+  PageHeight = 768;
+  PageWidth = 1024;
+  PageMinWidth;
+  PageMinHeight;
+  PageVWidth;
+  PageVHeight;
+  
+  
+]
+
+Main [
+ 
+
+  Return(Self);
+  
+  wineditctrl(167,50,240,80,0,TimeoutValue,10);
+  
+  wineditctrl(167,90,240,120,0,RetryValue,10);
+ 
+  If GUIButton(10, 160, 110, 130,
+               1, 1, 1, 1, 1, 
+               0, 0,
+               1, 0,
+               68, 2, 0,
+               "<FFD6D3CE>", \ButtonHighlight, \ButtonShadow, \ButtonTextColor,
+               0, 0,
+               "Fix Modbus Timeout", "Fixing...", \_DialogFont,
+                2, 1, 0);
+  [
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Gas\WM\00-11-30-046-04\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BF\00-02-29-051-01\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BF\00-02-30-051-01\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BF\00-04-18-054-05\RTU2");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BF\00-04-29-049-01\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BF\00-05-09-051-06\RTU2");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BF\00-06-30-051-01\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BF\00-08-31-054-03\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BF\00-09-31-054-03\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BF\00-11-30-051-01\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BF\00-13-07-054-05\RTU2");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BF\00-14-04-049-02\RTU2");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BF\02-03-29-051-01\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BF\03-03-30-051-01\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BG\01-10-24-049-25\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BG\01-15-24-049-25\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BG\02-11-24-049-25\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BG\03-13-13-050-25\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BG\04-03-13-050-25\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\BG\04-06-24-049-25\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\01-02-36-049-20\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\01-04-24-049-20\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\11-02-24-049-20\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\11-03-24-049-20\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\11-03-31-049-19\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\11-05-31-049-19\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\11-07-24-049-20\RTU-PSS");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\11-07-24-049-20\RTU-PSSB");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\11-07-31-049-19\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\11-07-36-049-20\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\11-09-24-049-20\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\11-14-25-049-20\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\91-03-36-049-20\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\91-06-24-049-20\RTU-PSS");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\91-08-36-049-20\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\ED\91-15-25-049-20\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\FA\00-03-13-079-26\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\FA\00-04-14-079-25\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\FA\00-04-16-079-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\FA\00-09-07-079-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\GL\01-04-06-050-23\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\GL\04-04-06-050-23\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\GL\07-05-06-050-23\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\GL\11-06-16-049-22\RTU2");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\01-04-02-049-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\01-05-02-049-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\01-16-03-049-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\21-01-02-049-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\21-01-03-049-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\21-03-01-049-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\21-03-02-049-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\21-04-01-049-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\21-08-02-049-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\21-08-35-048-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\21-09-35-048-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\21-11-36-048-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\21-13-01-049-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\21-13-35-048-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\21-14-35-048-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\21-14-36-048-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\21-16-35-048-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\22-05-01-049-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\22-09-02-049-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\LB\22-13-36-048-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MD\02-09-17-045-22\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MN\00-01-13-049-07\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MN\00-03-02-052-07\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MN\00-09-13-049-07\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MN\02-04-01-052-07\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MN\02-16-15-049-07\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MN\08-06-02-052-07\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MS\01-03-29-049-26\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MS\01-05-28-049-26\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MS\01-15-20-049-26\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MS\01-15-20-049-26\RTU2");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MS\01-15-20-049-26\RTU3");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MS\02-07-20-049-26\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MV\11-05-01-050-20\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\MV\11-06-01-050-20\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\PD\00-01-24-048-06\RTU2");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\PD\00-01-35-048-06\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\PD\00-04-01-047-01\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\PD\00-04-22-049-07\RTU4");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\PD\00-09-02-052-07\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\PD\00-12-18-050-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\PD\00-14-17-050-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\PD\00-14-17-050-24\RTU2");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\PD\01-01-24-048-06\RTU2");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\PD\01-05-32-048-05\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-01-16-049-27\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-02-04-052-25\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-02-19-051-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-03-13-050-25\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-03-13-050-25\RTU2");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-04-19-050-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-04-19-050-24\RTU2");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-08-29-051-25\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-09-22-051-25\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-11-21-051-25\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-12-07-051-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-12-12-050-27\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-13-09-050-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-14-07-051-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\01-16-06-051-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\03-01-10-050-27\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\03-03-02-050-27\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\03-14-11-050-27\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\07-01-02-050-27\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\TF\11-13-18-051-24\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\WH\01-15-15-052-22\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\WH\02-05-07-052-23\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\WH\04-05-07-052-23\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\WM\00-07-31-048-05\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\WM\02-01-13-048-06\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\WM\03-03-25-048-06\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\WM\03-04-25-048-06\RTU");
+    DriverArray = InsertArrayItem(DriverArray, Invalid, "Cenovus\Oil\WM\04-08-19-048-05\RTU");
+         
+    TagParms  = Dictionary();
+ 
+    Index=0;
+    { Verify that the tag exists & then put it in the list of tags to be modified }
+    whileloop(Index < ArraySize(DriverArray),
+      ifthen(Valid(Scope(\VTSDB, DriverArray[Index])\name),
+        TagParms[DriverArray[Index]] = Dictionary();
+        TagParms[DriverArray[Index]]["timelimit"] = TimeoutValue;
+        TagParms[DriverArray[Index]]["retries"] = RetryValue;
+      );
+      Index++);
+                  
+    Success = Invalid;
+    \Code\ModifyTags(&Success, TagParms);
+
+  ]
+ 
+]
+ 
