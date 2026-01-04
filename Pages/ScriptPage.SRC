@@ -1,0 +1,95 @@
+{
+This page will run a script that will set the Notebook areas when the Update button is clicked.
+
+It will set the Area to an expression as per Scott's example if the Area of the notebook matches the parent object. It will ignore any Notebooks where the parent object Area is System or the Area ends in Memo.
+
+you can set the area on Flowcomputer notepads to something like
+Concat(..\Area,"Note")
+This will prevent them from showing up by default when trending a tag.
+
+}
+[
+  Title = "Scripts";
+  
+  UpdateNotebooks  Module;
+]
+
+Main [
+  Return(Self);
+
+  If GUIButton(10, 70, 110, 40,
+               1, 1, 1, 1, 1, 
+               0, 0,
+               1, 0,
+               68, 2, 0,
+               "<FFD6D3CE>", \ButtonHighlight, \ButtonShadow, \ButtonTextColor,
+               0, 0,
+               "Update", "Updating...", \_DialogFont,
+                2, 1, 0);
+  [
+    UpdateNotebooks();
+  ]
+]
+
+<
+UpdateNotebooks
+(
+)
+[
+  NoteBookTags;
+  Index;
+  NoteBookTagObj;
+  ExpectedArea;
+  MemoArea;
+
+  Success;
+  TagParms;
+]
+
+UpdateTags [
+  If 1 WaitUpdate; 
+  [
+     { Find all Notebooks in the system... }
+    NoteBookTags = \GetTagList(Invalid, TRUE, 0, "*", "Notebook", Invalid, FALSE);
+
+     { Prepare TagParms for use with ModifyTags... }
+    TagParms = Dictionary();
+
+     { For each found Notebook... }
+    Index = 0;
+    WhileLoop(Index < ArraySize(NoteBookTags),
+       { Get the NoteBook object and determine what we expect the Area should be... }
+      NoteBookTagObj = Scope(\VTSDB, NoteBookTags[Index]);
+      ExpectedArea = ConCat(NoteBookTagObj\Area, "Note");
+      MemoArea = ConCat(NoteBookTagObj\Area, "Memo");
+      {ExpectedArea = ConCat(ParentObject(NoteBookTagObj)\Area, "Note");}
+      {MemoArea = ConCat(ParentObject(NoteBookTagObj)\Area, "Memo");}
+
+       { If the assigned Area is not what we expect and it's not System... }
+      IfThen(NoteBookTagObj\Area != ExpectedArea && 
+             NoteBookTagObj\Area != MemoArea && 
+             PickValid(NoteBookTagObj\Area, "System") != "System",
+             {PickValid(ParentObject(NoteBookTagObj)\Area, "System") != "System",}
+         { Update the TagParms with the update, marking the value for Area as an expression... }
+        TagParms[NoteBookTagObj\Name] = Dictionary();
+        TagParms[NoteBookTagObj\Name]["Area"] = "ConCat(..\Area, ""Note"")";
+        Metadata(TagParms[NoteBookTagObj\Name]["Area"], \System.#EXPRESS_META) = \System.#EXPRESS_SNAPSHOT; {optimized expression}
+      );
+
+      Index++;
+    );
+    
+     { Update the DB... }
+    Success = Invalid;
+    \Code\ModifyTags(&Success, TagParms);
+  ]
+]
+
+WaitUpdate [
+   { Wait for the update to finish... }
+  If Valid(Success);
+  [
+    Slay();
+  ]
+]
+>

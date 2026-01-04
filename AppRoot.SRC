@@ -47,6 +47,8 @@
   ]
 
   [ (PAGES)         {===== Modules that are graphic pages and dialogs =====}
+    ExportData Module "Pages\ExportData.SRC";
+    ScriptPage Module "Pages\ScriptPage.SRC";
     Page_3 Module "Pages\Page_3.SRC";
     Page_2 Module "Pages\Page_2.SRC";
     RIFE1 Module "Pages\RIFE1.SRC";

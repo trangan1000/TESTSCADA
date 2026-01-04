@@ -1,0 +1,420 @@
+[
+  Title = "ExportData";
+
+  GetHistoryData Module;
+
+  TagList;
+  TagList1;
+  TagList2;
+
+  ExportFileName;
+  CurrentTagFileName;
+  TagImportFileName;
+
+  MAXENTRIES = 100000;
+  BLOCKINC = 6 * 3600;
+
+  StopExport;
+  i=0;
+  j=0;
+  k=0;
+
+  CurrentTagName;
+  DisplayTagName;
+  PercentComplete;
+
+  ExportStartTime=0;
+  ExportEndTime;
+  TimeDifInHours;
+
+  { Where to export to }
+  ExportPath="c:\temp\Export\";
+  NoStretch = 1;
+
+  curTime;
+  val;
+  TagObj;
+
+  FlowComputerTags;
+  FlowChildTags;
+
+  tagcount;
+]
+
+Main [
+
+  Return(Self);
+
+  If GUIButton(10, 72, 110, 49,
+               1, 1, 1, 1, 1,
+               0, 0,
+               1, 0,
+               68, 2, 0,
+               "<FFD6D3CE>", \ButtonHighlight, \ButtonShadow, \ButtonTextColor,
+               0, 0,
+               "Export", "Exporting", \_DialogFont,
+                2, 1, 0);
+  [
+ 		StopExport=0;
+
+  	    CurrentTagFileName=Concat(ExportPath, "currenttag.dat");
+
+	 	GetHistoryData(TagList,  ExportStartTime, ExportEndTime);
+
+
+  ]
+
+   If GUIButton(120, 72, 220, 49,
+               1, 1, 1, 1, 1,
+               0, 0,
+               1, 0,
+               68, 2, 0,
+               "<FFD6D3CE>", \ButtonHighlight, \ButtonShadow, \ButtonTextColor,
+               0, 0,
+               "StopExport", "StopExport", \_DialogFont,
+                2, 1, 0);
+  [
+     StopExport=1;
+  ]
+
+  if wineditctrl(13,200,93,220,0,i,1,10,Scope(\VTSDB, "QCSI Label Font", TRUE)\Value,"<FFD6D3D6>","<FF000000>")==1;
+  [
+  	PercentComplete = PickValid( i / (100*ArraySize(TagList)),0);
+  	CurrentTagName = TagList[i];
+  ]
+
+
+  GUIText(10, 124, 862, 104,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          0, 4,
+          "%s",
+          PickValid(DisplayTagName, ""));
+
+  GUIText(231, 218, 337, 198,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          3, 4,
+          "%s",
+          PickValid(PercentComplete, ""));
+
+  if Watch(0,i);
+  [
+  	PercentComplete = PickValid(Format(7, 2, 100* (i / (ArraySize(TagList)))),0);
+  	DisplayTagName = CurrentTagName;
+  ]
+
+   if Watch(1);
+  [
+
+	ExportStartTime= CurrentTime(1); {CurrentTime(1)-(24*3600);  2019-08-12 10:42 }
+	ExportEndTime=0; {1514764860; Jan-21-2025 830pm MDT}
+
+	TimeDifInHours=(ExportStartTime-ExportEndTime)/3600;
+
+	TagImportFileName=Concat(ExportPath, "TagMapping.CSV");
+
+	curTime=CurrentTime(1);
+
+    tagcount=0; i=0;
+
+	{TagList = \GetTagList("Cenovus\Oil\BF\00-06-07-053-06\RTU\Process",TRUE,0,"*");}
+	TagList = \GetTagList("Cenovus\Site1",TRUE,0,"*");
+    CurrentTagName = TagList[i];
+	tagcount = ArraySize(TagList);
+
+  	PercentComplete = PickValid( Format(7, 2, 100 * (i / (ArraySize(TagList)))),0);
+
+  	DisplayTagName = CurrentTagName;
+
+
+  ]
+
+  GUIText(10, 103, 170, 83,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          0, 4,
+          "%s",
+          "Current Tag");
+  GUIText(204, 197, 364, 177,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          3, 4,
+          "%s",
+          "% Complete");
+  GUIText(112, 218, 218, 198,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          3, 4,
+          "%s",
+          PickValid(ArraySize(TagList), ""));
+  GUIText(10, 197, 119, 177,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          3, 4,
+          "%s",
+          "Current Tag Index");
+  GUIText(121, 197, 230, 177,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          3, 4,
+          "%s",
+          "Total Tags");
+  GUIText(5, 165, 111, 145,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          3, 4,
+          "%s",
+          PickValid(ExportStartTime, ""));
+  GUIText(144, 165, 250, 145,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          3, 4,
+          "%s",
+          PickValid(ExportEndTime, ""));
+  GUIText(271, 165, 377, 145,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          3, 4,
+          "%s",
+          PickValid(Format(7,1,TimeDifInHours), ""));
+  GUIText(-17, 145, 143, 125,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          3, 4,
+          "%s",
+          "End Time (Latest)");
+  GUIText(118, 145, 278, 125,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          3, 4,
+          "%s",
+          "StartTime (Earliest)");
+  GUIText(249, 145, 409, 125,
+          1, 1, 1, 1, 1 { Scaling              },
+          0, 0          { Movement             },
+          1, PickValid(\ScaleDisplayContent, 0) { Visibility, Font Scaling },
+          0, 0, 0       { Selectability        },
+          Brush("<00000000>", 0, 1), Pen("<FF000000>", 1, 1),
+          Scope(\VTSDB, "LabelFont", TRUE)\Value,
+          3, 4,
+          "%s",
+          "Hours to Export");
+]
+
+
+
+
+<
+{=============================================================================}
+GetHistoryData
+(
+   TagList;
+
+
+   ReportEnd;
+   ReportStart;
+)
+[
+
+  TagObj;
+  BlockStart;
+  BlockEnd;
+
+
+  Error;
+  Result;
+  FieldNames;
+
+  dataexisted;
+
+  j;
+  lasttime;
+
+]
+
+Init [
+
+  if 1 Loop;
+  [
+     { Skip Alarm Priority Tags }
+  	 TagObj=Scope(\VTSDB,TagList[i],TRUE);
+     whileloop(i<ArraySize(TagList) && (Cast(TagObj,4)=="IO" ),
+               Fwrite(CurrentTagFileName, 2, 0, """%s"" skipped \r\n",TagObj\Name),
+     					 TagObj=Scope(\VTSDB,TagList[i],TRUE),
+     					 i++);
+
+     CurrentTagName=TagObj\Name;
+     Fwrite(CurrentTagFileName, 2, 0, """%s""\r\n",TagObj\Name);
+  ]
+
+]
+
+Loop [
+
+  if 1 Chunk;
+  [
+     dataexisted=0;
+     BlockStart=ReportStart;
+	 BlockEnd = ReportEnd;
+  ]
+
+
+
+]
+
+
+Chunk [
+
+  if (BlockStart < BlockEnd) && (StopExport != 1) GetData;
+
+  if (BlockStart >= BlockEnd) NextTag;
+  [
+  	 TagImportFileName=Concat(ExportPath, "TagMapping.CSV");
+	 ifthen(dataexisted,  Fwrite(TagImportFileName, 2, 0, "%s,%s\r\n", ExportFileName, TagObj\Name));
+
+  ]
+
+  if (StopExport == 1) Done;
+
+]
+
+GetData [
+
+  if 1 ProcessHistory;
+  [
+
+  	FieldNames=New(2);
+	  FieldNames[0]="Value";      { in this period }
+	  FieldNames[1]="Timestamp";      { in this period }
+
+	  { clear results and error }
+	  Error = Result = Invalid;
+
+	  ExportFileName=Concat(Replace(TagObj\Name,0,strlen(TagObj\Name),"\","-"),".csv");
+	  ExportFileName=Replace(ExportFileName,0,strlen(ExportFileName)," ","");
+      ExportFileName=Replace(ExportFileName,0,strlen(ExportFileName),"—","-");
+
+
+		{ Get Current and previous period (hour=3600) }
+		\HistorianManager\GetTagHistory(&Error, &Result {Return codes},
+				 TagObj {Tag object},
+				 FieldNames {Fields},
+				 BlockStart, BlockEnd {Start, End (Ignored)},
+				 0,  MAXENTRIES {TPP, Num Entries});
+ ]
+
+
+]
+
+ProcessHistory [
+
+	if Valid(Error) CalcNextBlock;
+	[
+	   j=0;
+
+
+	   { Data later in the array is newest, print everything that isn't a NULL value time or null value }
+	   whileloop(j< (ArraySize(result,1)),
+	             ifthen(Valid(Result[1][j])&&Valid(Result[0][j]),
+	   	                Execute(dataexisted=1,
+						Fwrite(Concat(ExportPath,ExportFileName), 2, 0, "%s,%f\r\n",
+						concat(Date((Result[1][j]) / 86400, 30), " ",
+                               Time((Result[1][j]) % 86400, "HH:mm.ss" )),Result[0][j]))),
+	             j++);
+
+
+	   ifelse(ArraySize(result,1)==MAXENTRIES,lasttime=Result[1][MAXENTRIES-1],lasttime=Invalid);
+
+	]
+
+]
+
+CalcNextBlock [
+
+  if 1 Chunk;
+  [
+     ifelse(Valid(lasttime)==1,
+  	    Execute(BlockStart=lasttime+1,
+                BlockEnd = ReportEnd),
+		BlockStart=BlockEnd
+	       );
+  ]
+
+]
+
+
+NextTag [
+
+  If (i+1) < ArraySize(TagList) && !StopExport Loop;
+	[
+	  i++;
+
+	  TagObj=Scope(\VTSDB,TagList[i],TRUE);
+      whileloop(i<ArraySize(TagList) && (Cast(TagObj,4)=="AlarmPriority" || Cast(TagObj,4)=="AnalogControl" || Cast(TagObj,4)=="DigitalControl"|| Cast(TagObj,4)=="Script"),
+                         Fwrite(CurrentTagFileName, 2, 0, """%s"" skipped \r\n",TagObj\Name),
+     					 TagObj=Scope(\VTSDB,TagList[i],TRUE),
+     					 i++);
+
+	  CurrentTagName=TagObj\Name;
+
+	  Fwrite(CurrentTagFileName, 2, 0, """%s""\r\n",TagObj\Name);
+	]
+
+	if ((i+1) >= ArraySize(TagList)) || StopExport  Done;
+
+
+]
+
+Done [
+
+]
+>
